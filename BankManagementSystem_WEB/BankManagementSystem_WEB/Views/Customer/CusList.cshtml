@@ -1,0 +1,143 @@
+﻿@model IEnumerable<BankManagementSystem_WEB.Models.Customer>
+
+@{
+    ViewBag.Title = "CusList";
+}
+
+<!-- Top-left button for navigation -->
+<div class="top-left">
+    <a href="/Employee/EmployeeHub" class="btn btn-secondary">
+        Back to Employee Hub
+    </a>
+</div>
+
+<h2 class="text-center mb-4">List of customers :</h2>
+
+<div class="text-center mb-3">
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Create New</button>
+</div>
+
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+            <th>@Html.DisplayNameFor(model => model.LastName)</th>
+            <th>@Html.DisplayNameFor(model => model.Address)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.Password)</th>
+            <th>@Html.DisplayNameFor(model => model.Phone)</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.Password)</td>
+                <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                <td>
+                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal-@item.Id">Edit</button>
+                    <button class="btn btn-danger delete-btn" data-id="@item.Id">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body">
+                @{ Html.RenderAction("CusCreate", "Customer"); }
+            </div>
+        </div>
+    </div>
+</div>
+
+@foreach (var item in Model)
+{
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal-@item.Id" tabindex="-1" role="dialog" aria-labelledby="editModalLabel-@item.Id" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                    @{ Html.RenderAction("Edit", "Customer", new { id = item.Id }); }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.delete-btn').click(function () {
+            var id = $(this).data('id');
+            var confirmation = confirm('Are you sure you want to delete this?');
+            if (confirmation) {
+                $.ajax({
+                    url: '/Customer/Delete/' + id,
+                    type: 'POST',
+                    data: {
+                        '__RequestVerificationToken': $('input[name=__RequestVerificationToken]').val(),
+                        'id': id
+                    },
+                    success: function () {
+                        location.reload();
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .top-left {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        margin-top: 50px; /* Add margin-top to position the button nicely */
+    }
+
+    h2 {
+        margin-top: 20px;
+        color: #343a40;
+    }
+
+    .table {
+        margin-top: 20px;
+        background-color: #fff;
+    }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table th {
+            background-color: #343a40;
+            color: #fff;
+        }
+
+    .btn {
+        margin: 5px;
+    }
+
+    .container {
+        padding-top: 20px;
+    }
+</style>

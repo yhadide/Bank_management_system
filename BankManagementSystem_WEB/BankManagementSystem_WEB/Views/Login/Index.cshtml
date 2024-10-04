@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    h1 {
+        color: black;
+    }
+
+    p {
+        color: black;
+    }
+
+    .hero-section {
+        background: url('https://example.com/hero-bg.jpg') no-repeat center center;
+        background-size: cover;
+        padding: 100px 0;
+        color: white;
+        text-align: center;
+    }
+
+        .hero-section h1 {
+            font-size: 3em;
+            font-weight: bold;
+        }
+
+        .hero-section p {
+            font-size: 1.5em;
+        }
+
+    .cta-buttons .btn {
+        margin: 10px;
+    }
+
+    .info-section {
+        padding: 60px 0;
+        text-align: center;
+    }
+
+        .info-section h2 {
+            margin-bottom: 30px;
+        }
+
+    .info-cards .card {
+        margin: 20px;
+    }
+</style>
+
+<div class="hero-section">
+    <div class="container">
+        <h1>Welcome to Our Bank</h1>
+        <p>Your financial partner for life</p>
+        <div class="cta-buttons">
+            <a href="/Login/CustomerLogin" class="btn btn-primary btn-lg">Customer Login</a>
+            <a href="/login/EmployeeLogin" class="btn btn-secondary btn-lg">Employee Login</a>
+        </div>
+    </div>
+</div>
+
+<div class="info-section">
+    <div class="container">
+        <h2>Why Choose Us?</h2>
+        <div class="row info-cards">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Secure Banking</h5>
+                        <p class="card-text">We offer state-of-the-art security to keep your financial information safe.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Easy Access</h5>
+                        <p class="card-text">Access your account anytime, anywhere with our mobile and online banking.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Customer Support</h5>
+                        <p class="card-text">Our 24/7 customer support team is here to help you with any queries.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mt-4">
+                <p class="text-center">If you want to create an account or have any questions, please contact one of our employees.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
